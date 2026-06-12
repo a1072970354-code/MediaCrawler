@@ -332,6 +332,15 @@ async def parse_cmd(argv: Optional[Sequence[str]] = None):
                 rich_help_panel="Proxy Configuration",
             ),
         ] = config.STATIC_PROXY_URL,
+        dry_run: Annotated[
+            str,
+            typer.Option(
+                "--dry-run",
+                help="Dry-run mode: only print configuration, don't execute (supports yes/true/t/y/1 or no/false/f/n/0)",
+                rich_help_panel="Runtime Configuration",
+                show_default=True,
+            ),
+        ] = str(getattr(config, 'DRY_RUN', False)),
     ) -> SimpleNamespace:
         """MediaCrawler 命令行入口"""
 
@@ -339,6 +348,7 @@ async def parse_cmd(argv: Optional[Sequence[str]] = None):
         enable_sub_comment = _to_bool(get_sub_comment)
         enable_headless = _to_bool(headless)
         enable_ip_proxy_value = _to_bool(enable_ip_proxy)
+        enable_dry_run = _to_bool(dry_run)
         init_db_value = init_db.value if init_db else None
 
         # Parse specified_id and creator_id into lists
@@ -365,6 +375,7 @@ async def parse_cmd(argv: Optional[Sequence[str]] = None):
         config.IP_PROXY_POOL_COUNT = ip_proxy_pool_count
         config.IP_PROXY_PROVIDER_NAME = ip_proxy_provider_name
         config.STATIC_PROXY_URL = static_proxy_url
+        config.DRY_RUN = enable_dry_run
 
         # Set platform-specific ID lists for detail/creator mode
         if specified_id_list:
@@ -413,6 +424,7 @@ async def parse_cmd(argv: Optional[Sequence[str]] = None):
             cookies=config.COOKIES,
             specified_id=specified_id,
             creator_id=creator_id,
+            dry_run=config.DRY_RUN,
         )
 
     command = typer.main.get_command(app)

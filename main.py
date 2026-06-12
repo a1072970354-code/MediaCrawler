@@ -106,6 +106,30 @@ async def main() -> None:
         print(f"Database {args.init_db} initialized successfully.")
         return
 
+    # Dry-run mode: only print configuration, don't execute
+    if config.DRY_RUN:
+        print("=" * 60)
+        print("[DRY-RUN] MediaCrawler Configuration Preview")
+        print("=" * 60)
+        print(f"Platform:           {config.PLATFORM}")
+        print(f"Crawler Type:       {config.CRAWLER_TYPE}")
+        print(f"Login Type:         {config.LOGIN_TYPE}")
+        print(f"Keywords:           {config.KEYWORDS}")
+        print(f"Start Page:         {config.START_PAGE}")
+        print(f"Max Notes Count:    {config.CRAWLER_MAX_NOTES_COUNT}")
+        print(f"Get Comments:       {config.ENABLE_GET_COMMENTS}")
+        print(f"Get Sub Comments:   {config.ENABLE_GET_SUB_COMMENTS}")
+        print(f"Save Data Option:   {config.SAVE_DATA_OPTION}")
+        print(f"Save Data Path:     {config.SAVE_DATA_PATH or 'default (data/)'}")
+        print(f"Headless Mode:      {config.HEADLESS}")
+        print(f"Enable IP Proxy:    {config.ENABLE_IP_PROXY}")
+        print(f"Max Concurrency:    {config.MAX_CONCURRENCY_NUM}")
+        print(f"Max Comments/Note:  {config.CRAWLER_MAX_COMMENTS_COUNT_SINGLENOTES}")
+        print("=" * 60)
+        print("[DRY-RUN] No browser launched, no login, no requests, no data written.")
+        print("[DRY-RUN] Configuration is valid. Ready to execute.")
+        return
+
     crawler = CrawlerFactory.create_crawler(platform=config.PLATFORM)
     await crawler.start()
 

@@ -180,3 +180,7 @@ debug_tools
 
 database/*.db
 .omx/
+
+# Temporary analysis scripts
+analyze.py
+analyze_comments.py

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // 不建议自动分享会话
+  "share": "disabled",
+
+  // 项目级额外规则文件
+  "instructions": [
+    "AGENTS.md",
+    "skills/anti_stall.md",
+    "skills/git_workflow.md",
+    "skills/testing_rules.md",
+    "skills/model_routing.md"
+  ],
+
+  // 忽略大目录，减少噪音
+  "watcher": {
+    "ignore": [
+      ".git/**",
+      ".venv/**",
+      "venv/**",
+      "__pycache__/**",
+      "node_modules/**",
+      "data/**",
+      "cache/**",
+      "browser_data/**",
+      "downloads/**",
+      "output/**",
+      "outputs/**",
+      "logs/**",
+      "*.mp4",
+      "*.mov",
+      "*.mkv",
+      "*.avi",
+      "*.jpg",
+      "*.jpeg",
+      "*.png",
+      "*.webp",
+      "*.sqlite",
+      "*.db",
+      "*.log"
+    ]
+  },
+
+  // 自动更新建议先通知，不要自动改环境
+  "autoupdate": "notify"
+}

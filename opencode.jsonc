@@ -10,7 +10,9 @@
     "skills/anti_stall.md",
     "skills/git_workflow.md",
     "skills/testing_rules.md",
-    "skills/model_routing.md"
+    "skills/model_routing.md",
+    "skills/crawler_execution_skill.md",
+    "skills/platform_rules_skill.md"
   ],
 
   // 忽略大目录，减少噪音
